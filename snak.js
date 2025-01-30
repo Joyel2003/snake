@@ -29,5 +29,24 @@ function updateSnakePosition(){
     if(direction === 'DOWN') head.y += gridSize;
 
     snake.unshift(head);
-    
+    if(head.x === food.x && head.y === food.y){
+        score =+ 10;
+        food = getRandomFoodPosition();
+    }else {
+        snake.pop();
+    }
+
 }
+function checkCollisions(){
+    const head =snake[0];
+    if(head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height){
+        gameOver();
+    }
+    for(let i = 1; i < snake.length; i++){
+        if(head.x === snake[i].x && head.y === snake[i].y){
+            gameOver();
+        }
+    }
+}
+
+
